@@ -1,3 +1,5 @@
+#install.packages("dplyr")
+
 file_1 <- data.frame(read.csv("CSV_files/DevicesWithInventory_5e5c3260-8605-478c-9a0d-67924ce5ccca.csv"))
 file_2 <- data.frame(read.csv("CSV_files/DevicesWithInventory_ea5cdce2-43db-4f36-8a32-1e0c0720b08a.csv"))
 
@@ -32,3 +34,6 @@ anti_join(file_2,file_1)
 
 #identical rows
 right_join(file_1,file_2)
+
+
+print("hej")
