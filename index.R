@@ -1,6 +1,7 @@
 #install.packages("dplyr")
+#install.packages("generics")
 
-file_1 <- data.frame(read.csv("CSV_files/DevicesWithInventory_5e5c3260-8605-478c-9a0d-67924ce5ccca.csv"))
+file_1 <- data.frame(read.csv("CSV_files/DevicesWithInventory_4cec84c7-05ef-4a99-94c3-5a7313aee86a.csv"))
 file_2 <- data.frame(read.csv("CSV_files/DevicesWithInventory_ea5cdce2-43db-4f36-8a32-1e0c0720b08a.csv"))
 
 nrow(file_1)
@@ -29,11 +30,15 @@ file_2 <- data.frame(id,name,serial,comp_name,manufact,enrollment,model)
 #Compare file 1 and file 2
 
 require(dplyr)
-anti_join(file_1,file_2)
-anti_join(file_2,file_1)
+require(generics)
 
-#identical rows
-right_join(file_1,file_2)
+a <- anti_join(file_1,file_2)
+b <- anti_join(file_2,file_1)
+c <- rbind(a,b)
 
+#matching rows
+d <- generics::intersect(file_1,file_2)
+write.csv(d,"matching_rows.csv", row.names = FALSE)
 
-print("hej")
+#mismatching rows
+write.csv(c,"mismatching_rows.csv", row.names = FALSE)
